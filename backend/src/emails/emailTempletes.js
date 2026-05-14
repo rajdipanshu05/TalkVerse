@@ -5,7 +5,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Messenger</title>
+    <title>Welcome to TalkVerse</title>
   </head>
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
     <div style="background: linear-gradient(to right, #36D1DC, #5B86E5); padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
@@ -27,7 +27,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
       </div>
       
       <div style="text-align: center; margin: 30px 0;">
-        <a href=${clientURL} style="background: linear-gradient(to right, #36D1DC, #5B86E5); color: white; text-decoration: none; padding: 12px 30px; border-radius: 50px; font-weight: 500; display: inline-block;">Open Messenger</a>
+        <a href=${clientURL} style="background: linear-gradient(to right, #36D1DC, #5B86E5); color: white; text-decoration: none; padding: 12px 30px; border-radius: 50px; font-weight: 500; display: inline-block;">Open TalkVerse</a>
       </div>
       
       <p style="margin-bottom: 5px;">If you need any help or have questions, we're always here to assist you.</p>
