@@ -1,19 +1,31 @@
 // const express = require("express")
 import express from "express"
-import dotenv from "dotenv"
+// import dotenv from "dotenv"
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
+import { connectDB } from "./lib/db.js";
+import { ENV } from "./lib/env.js";
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = ENV.PORT || 3000;
+
+app.use(express.json()); //req.body
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages",messageRoutes);
 
-app.listen(PORT,()=>{
-    console.log(`Server is Listening on Port : ${PORT}`);
-    
-})
+connectDB()
+    .then(()=>{
+        app.listen(PORT,()=>{
+            console.log(`Server is Listening on Port : ${PORT}`);
+            ;
+        })
+    })
+    .catch((err)=>{
+        console.error("Failed to connect DB : ",err);
+        process.exit(1);
+        
+    })
