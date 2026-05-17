@@ -4,7 +4,8 @@ import { getAllContacts, getMessageByUserId, sendMessage,getChatPartners } from 
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 
 const router = express.Router()
-router.use(arcjetProtection,protectRoute);
+// router.use(arcjetProtection,protectRoute);
+router.use(protectRoute);
 
 router.get("/contacts", getAllContacts)
 router.get("/chats", getChatPartners) // /:id waala iske niche hi hona chahiye wrna fir whi catch ho jyega
