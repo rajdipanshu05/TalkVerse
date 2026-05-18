@@ -1,23 +1,29 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useRef} from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import { useChatStore } from '../store/useChatStore';
 import ChatHeader from './ChatHeader'
 import NoChatHistoryPlaceholder from './NoChatHistoryPlaceholder';
 import MessagesLoadingSkeleton from './MessagesLoadingSkeleton';
+import MessageInput from './MessageInput';
 
 
 function ChatContainer() {
   const {selectedUser, getMessagesByUserId, messages,isMessagesLoading} = useChatStore();
   const {authUser} = useAuthStore();
+  const messageEndRef = useRef(null);
   
   useEffect(() => {
     getMessagesByUserId(selectedUser._id)
   }, [selectedUser,getMessagesByUserId])
   
-
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   return (
-    <>
+    <div className="flex flex-col h-full">
       <ChatHeader/>
       <div className="flex-1 px-6 overflow-y-auto py-8">
         {messages.length > 0 && !isMessagesLoading ? (
@@ -39,14 +45,18 @@ function ChatContainer() {
                   )}
                   {msg.text && <p className="mt-2">{msg.text}</p>}
                   <p className="text-xs mt-1 opacity-75 flex items-center gap-1">
-                    {new Date(msg.createdAt).toLocaleTimeString(undefined, {
+                    {new Date(msg.createdAt).toLocaleTimeString("en-IN", {
                       hour: "2-digit",
                       minute: "2-digit",
+                      hour12: true,
+                      timeZone: "Asia/Kolkata"
                     })}
                   </p>
                 </div>
               </div>
             ))}
+            {/* 👇 scroll target */}
+            <div ref={messageEndRef} />
           </div>
         ) : isMessagesLoading ? (
           <MessagesLoadingSkeleton/>
@@ -54,8 +64,9 @@ function ChatContainer() {
           <NoChatHistoryPlaceholder name={selectedUser.fullName} />
         )}
       </div>
+      <MessageInput />
 
-    </>
+    </div>
   )
 }
 
