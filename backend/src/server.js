@@ -15,7 +15,13 @@ const PORT = ENV.PORT || 3000;
 
 //payload too large error
 app.use(express.json({limit:"5mb"})); //req.body
-app.use(cors({origin : "", credentials : true}))
+app.use(
+  cors({
+    origin: "https://talkverse-p97r.onrender.com",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(cookieParser());
 
 
