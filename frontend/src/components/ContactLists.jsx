@@ -6,14 +6,14 @@ import { useAuthStore } from "../store/useAuthStore";
 import UsersLoadingSkeleton from "./UsersLoadingComponent";
 
 function ContactList() {
-  const { getAllContacts, allContacts, setSelectedUser, isUsersLoading } = useChatStore();
+  const { getAllContacts, allContacts, setSelectedUser, isUserLoading } = useChatStore();
   const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getAllContacts();
   }, [getAllContacts]);
 
-  if (isUsersLoading) return <UsersLoadingSkeleton/>;
+  if (isUserLoading) return <UsersLoadingSkeleton/>;
 
   return (
     <>

@@ -83,7 +83,6 @@ export const useAuthStore = create((set,get)=>({
         const socket = io("http://localhost:3000",{
             withCredentials : true //this ensures cookies are sent with connection
         })
-        socket.connect();
         set({socket : socket})
 
         //listen for online users event
