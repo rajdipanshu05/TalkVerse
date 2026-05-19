@@ -80,7 +80,7 @@ export const useAuthStore = create((set,get)=>({
     connectSocket: () => {
         const {authUser} = get();
         if(!authUser || get().socket?.connected) return
-        const socket = io("http://localhost:3000",{
+        const socket = io("https://talkverse-c8lp.onrender.com",{
             withCredentials : true //this ensures cookies are sent with connection
         })
         set({socket : socket})
